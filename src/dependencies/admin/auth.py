@@ -1,13 +1,12 @@
 import logging
 
-from dishka import AsyncContainer, Scope
-from fastapi_users.jwt import generate_jwt, decode_jwt
+from dishka import AsyncContainer
+from fastapi import Request
 from jwt import PyJWTError
 from sqladmin.authentication import AuthenticationBackend
-from fastapi import Request
 
-from src.presentation.interactors.bot import AdminAuthNotifier
 from src.app_config import AppConfig
+from src.utils.jwt import generate_jwt, decode_jwt
 
 logger: logging.Logger = logging.getLogger(__name__)
 
@@ -16,7 +15,6 @@ class AdminAuth(AuthenticationBackend):
     async def login(self, request: Request) -> bool:
         container: AsyncContainer = request.state.dishka_container
         config = await container.get(AppConfig)
-        notifier = await container.get(AdminAuthNotifier)
 
         form = await request.form()
         username, password = form["username"], form["password"]
@@ -24,10 +22,7 @@ class AdminAuth(AuthenticationBackend):
             username != config.secret.admin_user
             or password != config.secret.admin_password.get_secret_value()
         ):
-            await notifier.bad_auth()
             return False
-
-        await notifier.success_auth()
 
         data = {"sub": "admin", "aud": ["sqladmin:auth"]}
         token = generate_jwt(data, config.secret.admin_jwt, 3600, algorithm="HS256")

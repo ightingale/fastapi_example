@@ -7,7 +7,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
 from src.app_config import PostgresConfig
-from src.data_access.models import BaseDb
+from src.data_access.models import Base
 from src.utils.loggers import setup_logger
 
 # this is the Alembic Config object, which provides
@@ -22,7 +22,7 @@ setup_logger()
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata: MetaData = BaseDb.metadata
+target_metadata: MetaData = Base.metadata
 
 
 # other values from the config, defined by the needs of env.py,

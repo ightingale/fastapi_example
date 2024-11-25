@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "telechecker"
+name = "fastapi_example"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
@@ -9,17 +9,13 @@ readme = "README.md"
 python = "^3.12"
 fastapi = {extras = ["all"], version = "^0.115.5"}
 dishka = "^1.4.1"
-fastapi-users = {extras = ["sqlalchemy"], version = "^14.0.0"}
-async-sqlalchemy = "^1.0.0"
 alembic = "^1.14.0"
 asyncpg = "^0.30.0"
 uvicorn = "^0.32.1"
 aiohttp = "3.10.11"
-taskiq = {extras = ["redis"], version = "^0.11.9"}
-taskiq-redis = { git = "https://github.com/ightingale/taskiq-redis.git", branch = "progress_pubsub" }
-aioboto3 = "^13.2.0"
-aiogram = "^3.15.0"
 sqladmin = {extras = ["full"], version = "^0.20.1"}
+sqlalchemy = "^2.0.36"
+pyjwt = "^2.10.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.6.3"
