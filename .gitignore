@@ -1,0 +1,9 @@
+.idea
+.env
+.ruff_cache
+.venv
+.zshrc
+__pycache__/
+/poetry.lock
+/.env.docker
+/.env.local
